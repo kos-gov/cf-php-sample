@@ -1,0 +1,22 @@
+{
+    "application_id": "8fe7ad26-a386-4317-86fa-b7eb7a84e581",
+    "application_name": "redis-example-app",
+    "application_uris": ["redis-example-app.kpaasta.kr"],
+    "application_version": "fe30c82f-ed4d-4775-9ed5-88eb14585430",
+    "cf_api": "https://api.kpaasta.kr",
+    "limits": {
+        "disk": 1024,
+        "fds": 16384,
+        "mem": 256
+    },
+    "name": "redis-example-app",
+    "organization_id": "8e3ca91c-e2e4-4b8c-bda6-7dc20b205936",
+    "organization_name": "arom-DefaultOrg",
+    "process_id": "8fe7ad26-a386-4317-86fa-b7eb7a84e581",
+    "process_type": "web",
+    "space_id": "d9fa544d-f621-4c89-8a71-d2ff75128206",
+    "space_name": "defaultSpace",
+    "uris": ["redis-example-app.kpaasta.kr"],
+    "users": null,
+    "version": "fe30c82f-ed4d-4775-9ed5-88eb14585430"
+}

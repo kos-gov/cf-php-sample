@@ -1,0 +1,18 @@
+{
+    "shared-redis-service": [{
+        "binding_name": null,
+        "credentials": {
+            "host": "10.1.0.52",
+            "password": "814293d0-0c97-4fa5-8691-8d0bf8f3ed9b",
+            "port": 46031
+        },
+        "instance_name": "redis-service-instance2",
+        "label": "shared-redis-service",
+        "name": "redis-service-instance2",
+        "plan": "shared-vm",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": ["pivotal", "redis"],
+        "volume_mounts": []
+    }]
+}
