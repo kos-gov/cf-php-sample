@@ -1,0 +1,6 @@
+---
+applications:
+- name: cf-php
+  memory: 512M
+  instances: 1
+  random-route: true

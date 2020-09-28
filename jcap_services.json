@@ -1,0 +1,21 @@
+{
+    "MySQL Database": [{
+        "binding_name": null,
+        "credentials": {
+            "hostname": "proxy-intl.service.kosgov",
+            "name": "op_4af4fedd_b0a0_4a62_b472_ea3fc796755d",
+            "password": "4b6c7f1fd3213dda",
+            "port": "3306",
+            "uri": "mysql://c124c267657046a0:4b6c7f1fd3213dda@proxy-intl.service.kosgov:3306/op_4af4fedd_b0a0_4a62_b472_ea3fc796755d",
+            "username": "c124c267657046a0"
+        },
+        "instance_name": "mysql-test",
+        "label": "MySQL Database",
+        "name": "mysql-test",
+        "plan": "Premium",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": ["mysql", "document"],
+        "volume_mounts": []
+    }]
+}
