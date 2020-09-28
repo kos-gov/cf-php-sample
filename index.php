@@ -15,7 +15,7 @@ $R = new RecursiveIteratorIterator(
 );
 
 if ($debug_mode) {
-	echo "****************** JCAP_APPLICATION *****************\n";
+	echo "****************** VCAP_APPLICATION *****************\n";
 }
 
 $cfapp = [];
@@ -27,7 +27,7 @@ $cnt = 0;
 foreach ($R as $key => $val) {
 	if (is_array($val)) {
 		if ($debug_mode) {
-			echo $key . " (key), value : (array) \n";
+			echo "Array ==> key : " . $key . ", value : (array) \n";
 		}
 		if (strcasecmp($key, "uris") == 0) {
 			$keyName = "application_uris";
@@ -38,11 +38,11 @@ foreach ($R as $key => $val) {
 	} else {
 		if ($val != null) {
 			if ($debug_mode) {
-				echo "$key => $val \n";
+				echo "Non-Array ==> Key : " . $key . ", value : " . $val . "\n";
 			}
 		} else {
 			if ($debug_mode) {
-				echo "$key => null \n";
+				echo "Non-Array ==> Key : " . $key . ", value : null \n";
 			}
 		}
 
@@ -118,17 +118,19 @@ $R = new RecursiveIteratorIterator(
 );
 
 if ($debug_mode) {
-	echo "****************** JCAP_SERVICES *****************\n";
+	echo "****************** VCAP_SERVICES *****************\n";
 }
 
 $cfservice = [];
 $cfservicename = "";
 $index = 0;
+$bMatchedLabel = false;
+$bCredentials = false;
 
 foreach ($R as $key => $val) {
 	if (is_array($val)) {
 		if ($debug_mode) {
-			echo $key . " (key), value : (array) \n";
+			echo "Array ==> key : " . $key . ", value : (array) \n";
 		}
 		if ($index == 0 && $key != "VCAP_SERVICES") {
 			$cfservicename = $key;
@@ -139,18 +141,36 @@ foreach ($R as $key => $val) {
 		if ($index == 1 && empty($cfservicename)) {
 			$cfservicename = $key;
 		}
+		if ($key === "credentials") {
+			$bCredentials = true;
+		}
 		$index = $index + 1;
 	} else {
-
 		if ($val != null) {
 			if ($debug_mode) {
-				echo "$key => $val \n";
+				echo "Non-Array ==> Key : " . $key . ", value : " . $val . "\n";
 			}
-			$keyName = $key;
-			$cfservice[$keyName] = $val;
+			if ($key === "label") {
+				$bMatchedLabel = true;
+			}
+			if ($bMatchedLabel == true && $key === "name") {
+				if ($bCredentials == false) {
+					$keyName = $key;
+					$cfservice[$keyName] = $val;
+				} else {
+					// "credentials"의 자식인 "name"의 값은 무시한다.
+				}
+			}
+			if ($bMatchedLabel == true && $key === "plan") {
+				$keyName = $key;
+				$cfservice[$keyName] = $val;
+			}
+			if ($key === "username") {
+				$bCredentials = false;
+			}
 		} else {
 			if ($debug_mode) {
-				echo "$key => null \n";
+				echo "Non-Array ==> Key : " . $key . ", value : null \n";
 			}
 		}
 	}
@@ -424,9 +444,9 @@ if ($debug_mode) {
 						<?php if (isset($cfservicename)) : ?>
 						<div>
 							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ptl txt-r type-ellipsis">
-								<a href='https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html' target='_blank'
+								<a href='https://docs.cloudfoundry.org/devguide/services/managing-services.html' target='_blank'
 									class='type-accent-4'>
-									<span class="small">Configuring Services</span><span
+									<span class="small">Manage Services</span><span
 										class="fa fa-icon fa-external-link plm txt-m small"></span>
 								</a>
 							</div>
